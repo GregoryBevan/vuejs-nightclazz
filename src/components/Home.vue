@@ -1,23 +1,19 @@
 <template>
   <!-- Component html code here -->
-  <p>{{ series }}</p>
+  <h1>{{ title }}</h1>
 </template>
 
 <script>
 // Add imports here
 export default {
-  // Component definition
+  // Component definitiona
   data () {
     return {
-      series: 'Liste des séries'
+      title: 'Liste des séries'
     }
   }
 }
 </script>
 
 <style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
 </style>
