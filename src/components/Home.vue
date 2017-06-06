@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import Serie from '@/components/Serie.vue'
+import Serie from '@/components/Serie'
+import seriesService from '@/services/series.service'
 
 // Add imports here
 export default {
@@ -21,6 +22,9 @@ export default {
     return {
       title: 'Liste des séries'
     }
+  },
+  created () {
+    seriesService.getSeries().then(response => console.log(response.data))
   },
   components: {
     serie: Serie
