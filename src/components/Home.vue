@@ -3,10 +3,7 @@
   <div class="container">
     <h1>{{ title }}</h1>
     <ul class="list-group">
-      <serie></serie>
-      <serie></serie>
-      <serie></serie>
-      <serie></serie>
+      <serie v-for="serie in series" :serie-details="serie"></serie>
     </ul>
   </div>
 </template>
@@ -20,11 +17,12 @@ export default {
   // Component definitiona
   data () {
     return {
-      title: 'Liste des séries'
+      title: 'Liste des séries',
+      series: []
     }
   },
   created () {
-    seriesService.getSeries().then(response => console.log(response.data))
+    seriesService.getSeries().then(response => (this.series = response.data.map(item => item.show)))
   },
   components: {
     serie: Serie
