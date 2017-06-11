@@ -1,5 +1,5 @@
 <template>
-  <li class="list-group-item" @click="clicked(data)">
+  <li class="list-group-item" @click="clicked">
     <div class="media">
       <div class="media-left" v-if="serieDetails && serieDetails.image">
         <img class="media-object" :src="serieDetails.image.medium" />
@@ -8,6 +8,7 @@
         <h4 class="media-heading">{{ serieDetails.name }}</h4>
         <div v-html="serieDetails.summary"></div>
       </div>
+
     </div>
   </li>
 </template>
@@ -16,7 +17,12 @@
 export default {
   props: [
     'serieDetails'
-  ]
+  ],
+  methods: {
+    clicked: function () {
+      this.$emit('clicked', this.serieDetails)
+    }
+  }
 }
 </script>
 
