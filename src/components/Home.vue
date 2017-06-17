@@ -2,8 +2,10 @@
   <!-- Component html code here -->
   <div class="container">
     <h1>{{ title }}</h1>
+    <input type="text" v-model="search" class="form-control" placeholder="Filtrer..."/>
+    <br>
     <ul class="list-group">
-      <serie v-for="serie in series" :serie-details="serie" @clicked="toggleFavorites($event)"></serie>
+      <serie v-for="serie in filteredSeries" :serie-details="serie" @clicked="toggleFavorites($event)"></serie>
     </ul>
   </div>
 </template>
@@ -19,7 +21,8 @@ export default {
   data () {
     return {
       title: 'Liste des séries',
-      series: []
+      series: [],
+      search: ''
     }
   },
   created () {
@@ -32,6 +35,11 @@ export default {
   },
   components: {
     serie: Serie
+  },
+  computed: {
+    filteredSeries: function () {
+      return this.search === '' ? this.series : this.series.filter(serie => serie.name.toLowerCase().includes(this.search.toLowerCase()))
+    }
   }
 }
 </script>
