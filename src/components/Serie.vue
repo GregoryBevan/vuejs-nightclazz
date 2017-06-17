@@ -1,5 +1,6 @@
 <template>
   <li class="list-group-item" @click="clicked">
+    <i class="glyphicon star" :class="[isFav ? 'glyphicon-star' : 'glyphicon-star-empty']"></i>
     <div class="media">
       <div class="media-left" v-if="serieDetails && serieDetails.image">
         <img class="media-object" :src="serieDetails.image.medium" />
@@ -14,13 +15,25 @@
 </template>
 
 <script>
+import favoritesService from '@/services/favorites.service'
+
 export default {
   props: [
     'serieDetails'
   ],
+  data () {
+    return {
+      list: favoritesService.list
+    }
+  },
   methods: {
     clicked: function () {
       this.$emit('clicked', this.serieDetails)
+    }
+  },
+  computed: {
+    isFav: function () {
+      return this.list.find(item => item.id === this.serieDetails.id)
     }
   }
 }
@@ -29,6 +42,12 @@ export default {
 <style scoped>
 .list-group-item {
     position: relative
+}
+
+.star {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
 .media {
