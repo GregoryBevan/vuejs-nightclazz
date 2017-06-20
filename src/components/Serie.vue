@@ -15,17 +15,10 @@
 </template>
 
 <script>
-import favoritesService from '@/services/favorites.service'
-
 export default {
   props: [
     'serieDetails'
   ],
-  data () {
-    return {
-      list: favoritesService.list
-    }
-  },
   methods: {
     clicked: function () {
       this.$emit('clicked', this.serieDetails)
@@ -33,7 +26,7 @@ export default {
   },
   computed: {
     isFav: function () {
-      return this.list.find(item => item.id === this.serieDetails.id)
+      return this.$store.state.favorites.find(item => item.id === this.serieDetails.id)
     }
   }
 }

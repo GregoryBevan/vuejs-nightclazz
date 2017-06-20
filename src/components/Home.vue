@@ -13,7 +13,6 @@
 <script>
 import Serie from '@/components/Serie'
 import seriesService from '@/services/series.service'
-import favoritesService from '@/services/favorites.service'
 
 // Add imports here
 export default {
@@ -30,7 +29,9 @@ export default {
   },
   methods: {
     toggleFavorites: function (serie) {
-      !favoritesService.list.find(item => item.id === serie.id) ? favoritesService.addFavorite(serie) : favoritesService.removeFavorite(serie)
+      !this.$store.state.favorites.find(item => item.id === serie.id)
+          ? this.$store.commit('addFavorite', serie)
+          : this.$store.commit('removeFavorite', serie)
     }
   },
   components: {

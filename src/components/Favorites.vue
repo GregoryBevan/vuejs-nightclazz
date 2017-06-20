@@ -9,7 +9,6 @@
 
 <script>
 import Serie from '@/components/Serie'
-import favoritesService from '@/services/favorites.service'
 
 export default {
   data () {
@@ -19,7 +18,7 @@ export default {
     }
   },
   mounted () {
-    this.favorites = favoritesService.list
+    this.favorites = this.$store.state.favorites
   },
   components: {
     serie: Serie
